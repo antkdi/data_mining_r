@@ -1,0 +1,73 @@
+---
+title: "Example of Simple Regression: mammals data"
+author: "박장시 jangsea.park@jangsea.park@gmail.com"
+date: "2016-06-21"
+output: html_document
+---
+
+```{r load packages, echo=FALSE}
+library(ggplot2)
+library(MASS)
+```
+
+# 데이터 설명
+
+## 요약
+
+62종 육지 포유류의 평균 뇌 무게와 몸무게 데이터
+
+## 변수
+
+*   body: body weight in kg.
+*   brain: brain weight in g.
+*   name: Common name of species. (Rock hyrax-a = Heterohyrax brucci, Rock hyrax-b = Procavia habessinic..)
+
+## 실제 값
+
+```{r print mammals}
+mammals
+```
+
+# 산점도 그리기
+x축을 몸무게, y축을 뇌 무게로 설정하여, 산점도를 그리면 아래 그림과 같다.
+
+```{r draw scatter plot, fig.align='center', fig.width=10, fig.height=5}
+ggplot(mammals, aes(x=body, y=brain)) +
+    geom_point(shape=1) +
+    theme_bw()
+```
+
+변수의 개별 수치가 작은 값 근처에 몰려 있으므로 로그 변환을 취해서 산점도를 그려본다.
+
+```{r draw scatter plot with log transformation, fig.align='center', fig.width=10, fig.height=5}
+ggplot(mammals, aes(x=log10(body), y=log10(brain))) +
+    geom_point(shape=1) +
+    theme_bw()
+```
+
+# 단순 회귀 분석
+
+아래와 같은 단순 회귀 분석 모형을 만들어 두 변수 사이의 관계를 파악한다.
+
+$$log_{10}(brain) = \beta_0 + \beta_1 log_{10}(body) + \epsilon$$
+
+```{r fit regression model}
+fit <- lm(log10(brain) ~ log10(body), data=mammals)
+summary(fit)
+```
+
+회귀 분석 결과를 살펴보면 두 변수 사이에 아래와 같은 모형을 만들 수 있다.
+
+$$log_{10}(brain) = `r round(fit$coefficients[1], 4)` + `r round(fit$coefficients[2], 4)` log_{10}(body) + \epsilon$$
+
+R-square 값은 `r round(summary(fit)$r.squared, 2)`로 상당히 `r ifelse(summary(fit)$r.squared > .7, '높은', '낮은')` 것을 알 수 있다.
+
+회귀 직선을 산점도에 표현하면 아래와 같다.
+
+```{r draw regression line, fig.align='center', fig.width=10, fig.height=5}
+ggplot(mammals, aes(x=log10(body), y=log10(brain))) +
+    geom_point(shape=1) +
+    geom_smooth(method=lm, se=F) +
+    theme_bw()
+```
+

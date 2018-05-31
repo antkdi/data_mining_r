@@ -1,0 +1,17 @@
+{
+    "contents" : "#******************************\n# FastCampus lecture05\n# basic\n# jangsea.park@gmail.com\n# 2015-06-21\n#******************************\n\n# load packages -----------------------------------------------------------\n\nlibrary(ggplot2)\n\n# factor ------------------------------------------------------------------\n\ngrade <- c('A', 'B', 'C', 'D', 'F')\ngrades <- sample(grade, 50, replace=T)\n\ngrades1 <- factor(grades)\ngrades1\nclass(grades1)\n\ngrades2 <- factor(grades, levels=rev(grade), ordered = T)\ngrades2\nclass(grades2)\n\n# frequency table ---------------------------------------------------------\n\n?mtcars\nstr(mtcars)\nView(mtcars)\n\n# frequency table\nmtcars$cyl\ntable(mtcars$cyl)\ntable(mtcars$mpg)\n\n# histogram\nqplot(mtcars$mpg, binwidth=5)\nqplot(iris$Sepal.Length, binwidth=.5)\n",
+    "created" : 1435033654954.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1734050940",
+    "id" : "1383B74F",
+    "lastKnownWriteTime" : 1434859014,
+    "path" : "D:/이해 자료/[외부교육]데이터분석 입문/lecture05/basic.R",
+    "project_path" : "basic.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

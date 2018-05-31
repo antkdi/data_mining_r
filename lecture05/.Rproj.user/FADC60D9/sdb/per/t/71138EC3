@@ -1,0 +1,17 @@
+{
+    "contents" : "#******************************\n# FastCampus lecture05\n# correlation\n# jangsea.park@gmail.com\n# 2015-06-21\n#******************************\n\n# load packages -----------------------------------------------------------\n\nlibrary(MASS)\nlibrary(ggplot2)\nlibrary(GGally)\n\n\n# read dataset ------------------------------------------------------------\n\nmammals\nstr(mammals)\n?mammals\n\n\n# draw scatter plot -------------------------------------------------------\n\nggplot(mammals, aes(x=body, y=brain)) +\n    geom_point()\n\nggplot(mammals, aes(x=log10(body), y=log10(brain), label=rownames(mammals))) +\n    geom_point() +\n    theme_bw() +\n    geom_text(hjust=0, vjust=0, angle=-45, alpha=.4)\n\n\n# calculate correlation coefficient ---------------------------------------\n\nwith(mammals, cor(body, brain))\nwith(mammals, cor(log10(body), log10(brain)))\n\n\n# draw scatter plot matrix ------------------------------------------------\n\nggpairs(iris[, 1:4])\nggpairs(iris, 1:4, colour = 'Species')\nggpairs(iris, colour = 'Species')\n",
+    "created" : 1435039311734.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2949598417",
+    "id" : "71138EC3",
+    "lastKnownWriteTime" : 1434858814,
+    "path" : "D:/이해 자료/[외부교육]데이터분석 입문/lecture05/correlation.R",
+    "project_path" : "correlation.R",
+    "properties" : {
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,17 @@
+{
+    "contents" : "#******************************\n# FastCampus lecture05\n# univariate\n# jangsea.park@gmail.com\n# 2015-06-21\n#******************************\n\n# load packages -----------------------------------------------------------\n\nlibrary(ggplot2)\n\n\n# read datasets -----------------------------------------------------------\n\niris\nstr(iris)\n?iris\n\n\n# five-number summary -----------------------------------------------------\n\nsl <- iris$Sepal.Length\nsw <- iris$Sepal.Width\npl <- iris$Petal.Length\npw <- iris$Petal.Width\n\n# 'fivenum' function\nfivenum(sl)\nfivenum(sw)\nfivenum(pl)\nfivenum(pw)\n\n# 'summary' function\nsummary(iris)\n\n\n# draw boxplot ------------------------------------------------------------\n\nggplot(iris, aes(x=Species, y=Sepal.Length)) +\n    geom_boxplot() +\n    theme_bw()\n\nggplot(iris, aes(x=Species, y=Sepal.Width)) +\n    geom_boxplot() +\n    theme_bw()\n\nggplot(iris, aes(x=Species, y=Petal.Length)) +\n    geom_boxplot() +\n    theme_bw()\n\nggplot(iris, aes(x=Species, y=Petal.Width)) +\n    geom_boxplot() +\n    theme_bw()\n\n\n# draw boxplot using loop -------------------------------------------------\n\ny.names <- names(iris)[1:4]\n\n# something wrong\nfor (y.name in y.names) {\n    p <- ggplot(iris, aes(x=Species, y=y.name)) +\n        geom_boxplot() +\n        theme_bw() +\n        ggtitle(paste('Box plot for', y.names))\n    print(p)\n}\n\n# use 'aes_string'\nfor (y.name in y.names) {\n    p <- ggplot(iris, aes_string(x='Species', y=y.name)) +\n        geom_boxplot() +\n        theme_bw() +\n        ggtitle(paste('Box plot for', y.names))\n    print(p)\n}\n\n# save png files\nfor (y.name in y.names) {\n    p <- ggplot(iris, aes_string(x='Species', y=y.name)) +\n        geom_boxplot() +\n        theme_bw() +\n        ggtitle(paste('Box plot for', y.names))\n    ggsave(p, filename=paste0('iris_boxplot_', y.name, '.png'))\n}\n",
+    "created" : 1435033656287.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1917218941",
+    "id" : "274C6C80",
+    "lastKnownWriteTime" : 1434858776,
+    "path" : "D:/이해 자료/[외부교육]데이터분석 입문/lecture05/univariate.R",
+    "project_path" : "univariate.R",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
